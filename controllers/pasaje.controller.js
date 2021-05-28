@@ -14,6 +14,11 @@ pasajeController.getPasajes = async (req, res) => {
     res.json(pasajes);
 }
 
+pasajeController.getPasaje = async (req, res) => {
+    var pasaje = await pasajeModel.findById(req.params.id);
+    res.json(pasaje);
+}
+
 pasajeController.addPasaje = async (req, res) => {
     var pasaje = new pasajeModel(req.body);
     try {
@@ -31,6 +36,7 @@ pasajeController.addPasaje = async (req, res) => {
 }
 
 pasajeController.deletePasaje = async (req, res) => {
+    console.log(req.params)
     try {
         await pasajeModel.deleteOne({_id : req.params.id});
         res.json({
@@ -48,7 +54,7 @@ pasajeController.deletePasaje = async (req, res) => {
 pasajeController.editPasaje = async (req, res) => {
     var pasaje = new pasajeModel(req.body);
     try {
-        await pasajeModel.updateOne({_id: req.body._id}, pasaje);
+        var d = await pasajeModel.updateOne({_id: req.body._id}, pasaje);
         res.json({
             'status' : '1',
             'msg' : 'Pasaje actualizado'
