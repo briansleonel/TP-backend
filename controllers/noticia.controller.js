@@ -12,8 +12,6 @@ noticiaController.getNoticias = async (req, res) => {
 };
 
 noticiaController.addNoticia = async (req, res) => {
-    //console.log(req.body)
-    //console.log(req)
     var noticia = new NoticiaModel(req.body);
     
     try {
