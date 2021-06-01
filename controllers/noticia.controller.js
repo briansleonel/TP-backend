@@ -7,8 +7,24 @@ const fs = require('fs');
 const noticiaController = {};
 
 noticiaController.getNoticias = async (req, res) => {
-  var noticias = await NoticiaModel.find();
-  res.json(noticias);
+
+    var criterios = {}
+
+    if(req.query.vigente != 'null')
+        criterios.vigente = req.query.vigente;
+
+    var noticias = await NoticiaModel.find(criterios);
+    res.json(noticias);
+
+  /*
+    var criterios = {};
+    var pasajes;
+
+    if(req.query.categoriaPasajero != '')
+        criterios.categoriaPasajero = req.query.categoriaPasajero
+
+    pasajes = await pasajeModel.find(criterios).populate('pasajero');
+  */
 };
 
 noticiaController.addNoticia = async (req, res) => {
